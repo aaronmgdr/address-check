@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ensdomains/ensjs": "^2.0.1",
+    "bignumber.js": "^9.0.1",
+    "ethers": "^5.4.7",
     "graphql": "^15.6.0",
     "graphql-request": "^3.5.0",
     "next": "11.1.2",
