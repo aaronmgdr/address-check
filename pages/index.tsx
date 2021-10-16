@@ -15,8 +15,8 @@ const Home: NextPage = () => {
       </Head>
       <nav className={styles.nav}><a href={"https://github.com/aaronmgdr/address-check"}>Readme</a></nav>
       <main className={styles.main}>
-        <h1>Address Checker</h1>
-        <p>Warns when address belongs to a smart contract, when it has no known tx on the celo network, and if there is anything know about it on Ethereum</p>
+        <h1>Celo Address Checker</h1>
+        <p>Reveals when address belongs to a smart contract, when it has no known tx on the celo network, and if there is anything known about it on Ethereum</p>
         <Demo />
       </main>
 
