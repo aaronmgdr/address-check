@@ -18,7 +18,7 @@ export default async function handler(
     } else {
       res.status(400).json({
         error: true,
-        message: "This address is Invalid",
+        message: "This address is invalid",
         advice: "stop",
         meta: {}
       })
