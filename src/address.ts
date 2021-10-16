@@ -29,7 +29,7 @@ export default async function addressInfo(address: string, chain: string): Promi
   }
 }
 
-function smartContract(celoData: AddressQuery, ethereumData: EthereumAddressInfo): Partial<AddressInfo> {
+function smartContract(celoData: AddressQuery | undefined, ethereumData: EthereumAddressInfo): Partial<AddressInfo> {
   if (!!celoData?.address?.contractCode) {
     const contractName = celoData?.address?.smartContract?.name
     return {
@@ -63,12 +63,8 @@ function provenEvil(address: string): Partial<AddressInfo> {
   return {}
 }
 
-function exchangeOwned(address: string ): Partial<AddressInfo> {
-  return {}
-}
-
 // has this address been used?
-function generalInfo(celoData: AddressQuery, ethereumData: EthereumAddressInfo): Partial<AddressInfo>  {
+function generalInfo(celoData: AddressQuery| undefined, ethereumData: EthereumAddressInfo): Partial<AddressInfo>  {
   if (Number(ethereumData.countTxs) > 0 && !celoData?.address?.transferTxs?.edges?.length) {
     return {
       advice: "warn",
@@ -126,7 +122,7 @@ async function getCeloExplorerData(address: string) {
     const data =  await request<AddressQuery>("https://explorer.celo.org/graphiql", query, {hash: address})
     return data
   } catch (error) {
-    return  {}
+    return
   }
 }
 
