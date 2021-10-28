@@ -68,3 +68,27 @@ input.info {
   font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
 }
+
+.message {
+  margin-top: 12px;
+  text-align: center;
+  font-weight: normal;
+  border-radius: 8px;
+  padding: 8px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.message.warn {
+  background-color: rgba(231, 172, 44, 0.4);
+  border-color: rgba(231, 172, 44, 0.9);
+}
+.message.stop {
+  background-color: rgba(175, 28, 28, 0.4);
+  border-color: rgba(175, 28, 28, 0.9);
+}
+
+.message.info {
+  background-color: rgba(3, 184, 255, 0.3);
+  border-color: rgba(3, 184, 255, 0.9);
+}
