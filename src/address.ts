@@ -134,7 +134,6 @@ interface AddressQuery {
 async function getCeloExplorerData(address: string) {
   try {
     const data =  await request<AddressQuery>("https://explorer.celo.org/graphiql", query, {hash: address})
-    console.info(data)
     return data
   } catch (error) {
     return

@@ -13,7 +13,7 @@ export default async function handler(
   if (req.method === 'GET') {
     const address = req.query.address.toString()
     if (ethers.utils.isAddress(address)) {
-      const info = await addressInfo(address, "celo")
+      const info = await addressInfo(address)
       res.status(200).json(info)
     } else {
       res.status(400).json({

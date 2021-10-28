@@ -164,7 +164,6 @@ export const handlers = [
     }
   }),
   graphql.query("getAddress", (req, res, ctx) => {
-    console.info(req.variables)
 
     const address = req.variables.hash
 
