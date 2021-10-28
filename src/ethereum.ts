@@ -85,5 +85,8 @@ const ETHPLORER_URL = "https://api.ethplorer.io"
 
 export async function getEthereumInfo(address: string): Promise<EthereumAddressInfo> {
   const response = await fetch(`${ETHPLORER_URL}/getAddressInfo/${address}?apiKey=${process.env.ETHPLORER_KEY}`)
-  return response.json()
+
+  const json = await response.json()
+  console.log(json)
+  return json
 }

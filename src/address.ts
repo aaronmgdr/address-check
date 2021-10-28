@@ -1,3 +1,4 @@
+import { utils } from 'ethers'
 import { request, gql } from 'graphql-request'
 import BAD_ADDRESSES from "./data/evil"
 import { EthereumAddressInfo, getEthereumInfo } from './ethereum'
@@ -12,7 +13,7 @@ export interface AddressInfo {
 }
 
 
-export default async function addressInfo(address: string, chain: string): Promise<AddressInfo> {
+export default async function addressInfo(address: string): Promise<AddressInfo> {
   const celoData = await getCeloExplorerData(address)
 
   const etherInfo = await getEthereumInfo(address)
@@ -71,6 +72,19 @@ function generalInfo(celoData: AddressQuery| undefined, ethereumData: EthereumAd
       message: "This address appears to have only been used with Ethereum not Celo. If you have the private key and expect this go for it. If you aren't sure, hold off."
     }
   }
+  if (celoData?.address?.transferTxs?.edges?.length || celoData?.address?.fetchedCoinBalance) {
+    return {
+      advice: "info",
+      message: `This address has been interacted with on Celo. It has a balance of ${celoData?.address?.fetchedCoinBalance? utils.formatEther(celoData.address.fetchedCoinBalance): 0}`
+    }
+  }
+
+  if (!Number(ethereumData.countTxs) && !celoData?.address?.transferTxs?.edges?.length) {
+    return {
+      advice: "warn",
+      message: "Could not find any history for this address on Celo or Ethereum. It could be new."
+    }
+  }
 
   return {}
 }
@@ -120,6 +134,7 @@ interface AddressQuery {
 async function getCeloExplorerData(address: string) {
   try {
     const data =  await request<AddressQuery>("https://explorer.celo.org/graphiql", query, {hash: address})
+    console.info(data)
     return data
   } catch (error) {
     return
